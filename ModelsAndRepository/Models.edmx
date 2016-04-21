@@ -1,0 +1,1225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="VSMDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="artikul">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Artikul" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Vid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="podwid" Type="varchar" MaxLength="20" />
+          <Property Name="defprice" Type="money" Nullable="false" />
+          <Property Name="author" Type="varchar" MaxLength="100" />
+          <Property Name="info1" Type="varchar" MaxLength="30" />
+          <Property Name="info2" Type="varchar" MaxLength="30" />
+          <Property Name="Proizvoditel" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="rowguid13" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="isMultiPrice" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="barcode">
+          <Key>
+            <PropertyRef Name="barcode" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="barcode" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Default_partner">
+          <Key>
+            <PropertyRef Name="Partner" />
+            <PropertyRef Name="Proizvoditel" />
+          </Key>
+          <Property Name="Partner" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Proizvoditel" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="default_percent" Type="int" Nullable="false" />
+          <Property Name="isDefault" Type="bit" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="doc_type">
+          <Key>
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="Interface" Type="tinyint" Nullable="false" />
+          <Property Name="Default_action" Type="tinyint" Nullable="false" />
+          <Property Name="strType" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="document">
+          <Key>
+            <PropertyRef Name="doc_nomer" />
+          </Key>
+          <Property Name="doc_nomer" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="type" Type="tinyint" Nullable="false" />
+          <Property Name="nomer" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="payed" Type="bit" Nullable="false" />
+          <Property Name="data_payed" Type="smalldatetime" />
+          <Property Name="partner" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tek_percent" Type="numeric" Precision="6" Scale="0" />
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+          <Property Name="izdal" Type="varchar" MaxLength="50" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="isPrinted" Type="bit" Nullable="false" />
+          <Property Name="isChecked" Type="bit" Nullable="false" />
+          <Property Name="zabelezka" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="document_detail">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="doc_nomer" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="doc_nomer" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Debit" Type="smallmoney" Nullable="false" />
+          <Property Name="Kredit" Type="smallmoney" Nullable="false" />
+          <Property Name="Dost_price" Type="smallmoney" Nullable="false" />
+          <Property Name="IsKons" Type="bit" Nullable="false" />
+          <Property Name="dost_price1" Type="smallmoney" Nullable="false" />
+          <Property Name="lastpercent" Type="tinyint" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="artInfo" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="dogovor">
+          <Key>
+            <PropertyRef Name="egn" />
+          </Key>
+          <Property Name="dogovor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="egn" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Familia" Type="varchar" MaxLength="50" />
+          <Property Name="Ime" Type="varchar" MaxLength="50" />
+          <Property Name="Prezime" Type="varchar" MaxLength="50" />
+          <Property Name="Data" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'VSMDatabase.dbo.dogovor_docs' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="dogovor_docs">
+          <Property Name="dogovor" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="docType" Type="varchar" MaxLength="50" />
+          <Property Name="data" Type="datetime" />
+        </EntityType>-->
+        <EntityType Name="dogovor_dost">
+          <Key>
+            <PropertyRef Name="dogovor" />
+            <PropertyRef Name="nomer" />
+          </Key>
+          <Property Name="dogovor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nomer" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="kat" Type="int" />
+          <Property Name="price" Type="smallmoney" />
+          <Property Name="price_to_plat" Type="smallmoney" />
+          <Property Name="pay" Type="bit" />
+          <Property Name="Back" Type="bit" />
+          <Property Name="data_get" Type="datetime" />
+          <Property Name="data_pay" Type="datetime" />
+          <Property Name="data_back" Type="datetime" />
+          <Property Name="dok_order" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Artikul" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VSMDatabase.dbo.Images' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="picture" Type="image" />
+        </EntityType>
+        <EntityType Name="obect">
+          <Key>
+            <PropertyRef Name="Obect" />
+          </Key>
+          <Property Name="Obect" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="adress" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="range" Type="tinyint" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="pari">
+          <Key>
+            <PropertyRef Name="nomer" />
+          </Key>
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+          <Property Name="suma" Type="money" Nullable="false" />
+          <Property Name="zabelezka" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="nomer" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="obect" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="partner">
+          <Key>
+            <PropertyRef Name="Partner" />
+          </Key>
+          <Property Name="Partner" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cPartnerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="100" />
+          <Property Name="EIK" Type="varchar" MaxLength="15" />
+          <Property Name="VAT" Type="varchar" MaxLength="15" />
+          <Property Name="IBAN" Type="nvarchar" MaxLength="22" />
+          <Property Name="Bank" Type="varchar" MaxLength="10" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="Place" Type="varchar" MaxLength="50" />
+          <Property Name="wid" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="podvid">
+          <Key>
+            <PropertyRef Name="vid" />
+            <PropertyRef Name="podvid" />
+          </Key>
+          <Property Name="vid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="podvid" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'VSMDatabase.dbo.Prices' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Prices">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="obect" />
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="price" Type="smallmoney" />
+          <Property Name="obect" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="Proizvoditel" />
+          </Key>
+          <Property Name="Proizvoditel" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="def_percent" Type="tinyint" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="revizia">
+          <Key>
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="kol" Type="int" />
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+          <Property Name="obect" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="computer" Type="int" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stoka">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="doc_number" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="obect" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="debit" Type="int" Nullable="false" />
+          <Property Name="kredit" Type="int" Nullable="false" />
+          <Property Name="price" Type="money" Nullable="false" />
+          <Property Name="artikul_info" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="dost_price" Type="money" Nullable="false" />
+          <Property Name="uniqueID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="nomerInDogovor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="vid">
+          <Key>
+            <PropertyRef Name="vid" />
+          </Key>
+          <Property Name="vid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ddsvalue" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="zajavka">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="obect" />
+          </Key>
+          <Property Name="id" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="obect" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+          <Property Name="text" Type="varchar" MaxLength="50" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="prior" Type="tinyint" />
+        </EntityType>
+        <Association Name="FK_Default_partner_Default_partner">
+          <End Role="partner" Type="Self.partner" Multiplicity="1" />
+          <End Role="Default_partner" Type="Self.Default_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="Partner" />
+            </Principal>
+            <Dependent Role="Default_partner">
+              <PropertyRef Name="Partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Default_partner_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Default_partner" Type="Self.Default_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="Proizvoditel" />
+            </Principal>
+            <Dependent Role="Default_partner">
+              <PropertyRef Name="Proizvoditel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kons_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="document_detail" Type="Self.document_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="document_detail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kons_document">
+          <End Role="document" Type="Self.document" Multiplicity="1" />
+          <End Role="document_detail" Type="Self.document_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document">
+              <PropertyRef Name="doc_nomer" />
+            </Principal>
+            <Dependent Role="document_detail">
+              <PropertyRef Name="doc_nomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_obect_obect">
+          <End Role="obect" Type="Self.obect" Multiplicity="1" />
+          <End Role="obect1" Type="Self.obect" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="obect">
+              <PropertyRef Name="Obect" />
+            </Principal>
+            <Dependent Role="obect1">
+              <PropertyRef Name="Obect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podvid_podvid">
+          <End Role="vid" Type="Self.vid" Multiplicity="1" />
+          <End Role="podvid" Type="Self.podvid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid">
+              <PropertyRef Name="vid" />
+            </Principal>
+            <Dependent Role="podvid">
+              <PropertyRef Name="vid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_obect">
+          <End Role="obect" Type="Self.obect" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Prices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="obect">
+              <PropertyRef Name="Obect" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="obect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proizvoditel_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Proizvoditel1" Type="Self.Proizvoditel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="Proizvoditel" />
+            </Principal>
+            <Dependent Role="Proizvoditel1">
+              <PropertyRef Name="Proizvoditel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stoka_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="stoka" Type="Self.stoka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stoka">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stoka_document">
+          <End Role="document" Type="Self.document" Multiplicity="1" />
+          <End Role="stoka" Type="Self.stoka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document">
+              <PropertyRef Name="doc_nomer" />
+            </Principal>
+            <Dependent Role="stoka">
+              <PropertyRef Name="doc_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VSMDatabaseModelStoreContainer">
+          <EntitySet Name="artikul" EntityType="Self.artikul" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="barcode" EntityType="Self.barcode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Default_partner" EntityType="Self.Default_partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="doc_type" EntityType="Self.doc_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="document" EntityType="Self.document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="document_detail" EntityType="Self.document_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dogovor" EntityType="Self.dogovor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dogovor_dost" EntityType="Self.dogovor_dost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="obect" EntityType="Self.obect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="pari" EntityType="Self.pari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="partner" EntityType="Self.partner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="podvid" EntityType="Self.podvid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvoditel" EntityType="Self.Proizvoditel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="revizia" EntityType="Self.revizia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="stoka" EntityType="Self.stoka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vid" EntityType="Self.vid" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="zajavka" EntityType="Self.zajavka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Images].[rowguid] AS [rowguid], 
+    [Images].[id] AS [id], 
+    [Images].[picture] AS [picture]
+    FROM [dbo].[Images] AS [Images]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Prices" EntityType="Self.Prices" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Prices].[id] AS [id], 
+    [Prices].[price] AS [price], 
+    [Prices].[obect] AS [obect], 
+    [Prices].[rowguid] AS [rowguid]
+    FROM [dbo].[Prices] AS [Prices]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Default_partner_Default_partner" Association="Self.FK_Default_partner_Default_partner">
+            <End Role="partner" EntitySet="partner" />
+            <End Role="Default_partner" EntitySet="Default_partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Default_partner_Proizvoditel" Association="Self.FK_Default_partner_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+            <End Role="Default_partner" EntitySet="Default_partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kons_artikul" Association="Self.FK_Kons_artikul">
+            <End Role="artikul" EntitySet="artikul" />
+            <End Role="document_detail" EntitySet="document_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kons_document" Association="Self.FK_Kons_document">
+            <End Role="document" EntitySet="document" />
+            <End Role="document_detail" EntitySet="document_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_obect_obect" Association="Self.FK_obect_obect">
+            <End Role="obect" EntitySet="obect" />
+            <End Role="obect1" EntitySet="obect" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podvid_podvid" Association="Self.FK_podvid_podvid">
+            <End Role="vid" EntitySet="vid" />
+            <End Role="podvid" EntitySet="podvid" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_artikul" Association="Self.FK_Prices_artikul">
+            <End Role="artikul" EntitySet="artikul" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_obect" Association="Self.FK_Prices_obect">
+            <End Role="obect" EntitySet="obect" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proizvoditel_Proizvoditel" Association="Self.FK_Proizvoditel_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditel" />
+            <End Role="Proizvoditel1" EntitySet="Proizvoditel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stoka_artikul" Association="Self.FK_stoka_artikul">
+            <End Role="artikul" EntitySet="artikul" />
+            <End Role="stoka" EntitySet="stoka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stoka_document" Association="Self.FK_stoka_document">
+            <End Role="document" EntitySet="document" />
+            <End Role="stoka" EntitySet="stoka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="VSMDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="artikul">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Artikul1" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="podwid" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="defprice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="info1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="info2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Proizvoditel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid13" Type="Guid" Nullable="false" />
+          <Property Name="isMultiPrice" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="document_detail" Relationship="Self.FK_Kons_artikul" FromRole="artikul" ToRole="document_detail" />
+          <NavigationProperty Name="Prices" Relationship="Self.FK_Prices_artikul" FromRole="artikul" ToRole="Prices" />
+          <NavigationProperty Name="stokas" Relationship="Self.FK_stoka_artikul" FromRole="artikul" ToRole="stoka" />
+        </EntityType>
+        <EntityType Name="barcode">
+          <Key>
+            <PropertyRef Name="barcode1" />
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="barcode1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Default_partner">
+          <Key>
+            <PropertyRef Name="Partner" />
+            <PropertyRef Name="Proizvoditel" />
+          </Key>
+          <Property Name="Partner" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Proizvoditel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="default_percent" Type="Int32" Nullable="false" />
+          <Property Name="isDefault" Type="Boolean" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="partner1" Relationship="Self.FK_Default_partner_Default_partner" FromRole="Default_partner" ToRole="partner" />
+          <NavigationProperty Name="Proizvoditel1" Relationship="Self.FK_Default_partner_Proizvoditel" FromRole="Default_partner" ToRole="Proizvoditel" />
+        </EntityType>
+        <EntityType Name="doc_type">
+          <Key>
+            <PropertyRef Name="type" />
+          </Key>
+          <Property Name="type" Type="Byte" Nullable="false" />
+          <Property Name="Interface" Type="Byte" Nullable="false" />
+          <Property Name="Default_action" Type="Byte" Nullable="false" />
+          <Property Name="strType" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="document">
+          <Key>
+            <PropertyRef Name="doc_nomer" />
+          </Key>
+          <Property Name="doc_nomer" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="type" Type="Byte" Nullable="false" />
+          <Property Name="nomer" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="payed" Type="Boolean" Nullable="false" />
+          <Property Name="data_payed" Type="DateTime" Precision="0" />
+          <Property Name="partner" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="tek_percent" Type="Decimal" Precision="6" Scale="0" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="izdal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="isPrinted" Type="Boolean" Nullable="false" />
+          <Property Name="isChecked" Type="Boolean" Nullable="false" />
+          <Property Name="zabelezka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="document_detail" Relationship="Self.FK_Kons_document" FromRole="document" ToRole="document_detail" />
+          <NavigationProperty Name="stokas" Relationship="Self.FK_stoka_document" FromRole="document" ToRole="stoka" />
+        </EntityType>
+        <EntityType Name="document_detail">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="doc_nomer" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="doc_nomer" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Debit" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Kredit" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="Dost_price" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="IsKons" Type="Boolean" Nullable="false" />
+          <Property Name="dost_price1" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <Property Name="lastpercent" Type="Byte" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="artInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="artikul" Relationship="Self.FK_Kons_artikul" FromRole="document_detail" ToRole="artikul" />
+          <NavigationProperty Name="document" Relationship="Self.FK_Kons_document" FromRole="document_detail" ToRole="document" />
+        </EntityType>
+        <EntityType Name="dogovor">
+          <Key>
+            <PropertyRef Name="egn" />
+          </Key>
+          <Property Name="dogovor1" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="egn" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Familia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dogovor_dost">
+          <Key>
+            <PropertyRef Name="dogovor" />
+            <PropertyRef Name="nomer" />
+          </Key>
+          <Property Name="dogovor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="nomer" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="kat" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="price_to_plat" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="pay" Type="Boolean" />
+          <Property Name="Back" Type="Boolean" />
+          <Property Name="data_get" Type="DateTime" Precision="3" />
+          <Property Name="data_pay" Type="DateTime" Precision="3" />
+          <Property Name="data_back" Type="DateTime" Precision="3" />
+          <Property Name="dok_order" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Artikul" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="obect">
+          <Key>
+            <PropertyRef Name="Obect1" />
+          </Key>
+          <Property Name="Obect1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="range" Type="Byte" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="obect11" Relationship="Self.FK_obect_obect" FromRole="obect" ToRole="obect1" />
+          <NavigationProperty Name="obect2" Relationship="Self.FK_obect_obect" FromRole="obect1" ToRole="obect" />
+          <NavigationProperty Name="Prices" Relationship="Self.FK_Prices_obect" FromRole="obect" ToRole="Prices" />
+        </EntityType>
+        <EntityType Name="pari">
+          <Key>
+            <PropertyRef Name="nomer" />
+          </Key>
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="suma" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="zabelezka" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nomer" Type="Guid" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="obect" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="partner">
+          <Key>
+            <PropertyRef Name="Partner1" />
+          </Key>
+          <Property Name="Partner1" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="cPartnerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EIK" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="VAT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IBAN" Type="String" MaxLength="22" FixedLength="false" Unicode="true" />
+          <Property Name="Bank" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="wid" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Default_partner" Relationship="Self.FK_Default_partner_Default_partner" FromRole="partner" ToRole="Default_partner" />
+        </EntityType>
+        <EntityType Name="podvid">
+          <Key>
+            <PropertyRef Name="vid" />
+            <PropertyRef Name="podvid1" />
+          </Key>
+          <Property Name="vid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="podvid1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="vid1" Relationship="Self.FK_podvid_podvid" FromRole="podvid" ToRole="vid" />
+        </EntityType>
+        <EntityType Name="Proizvoditel">
+          <Key>
+            <PropertyRef Name="Proizvoditel1" />
+          </Key>
+          <Property Name="Proizvoditel1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="def_percent" Type="Byte" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Default_partner" Relationship="Self.FK_Default_partner_Proizvoditel" FromRole="Proizvoditel" ToRole="Default_partner" />
+          <NavigationProperty Name="Proizvoditel11" Relationship="Self.FK_Proizvoditel_Proizvoditel" FromRole="Proizvoditel" ToRole="Proizvoditel1" />
+          <NavigationProperty Name="Proizvoditel2" Relationship="Self.FK_Proizvoditel_Proizvoditel" FromRole="Proizvoditel1" ToRole="Proizvoditel" />
+        </EntityType>
+        <EntityType Name="revizia">
+          <Key>
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="kol" Type="Int32" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="obect" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="computer" Type="Int32" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="stoka">
+          <Key>
+            <PropertyRef Name="uniqueID" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="doc_number" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="obect" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="debit" Type="Int32" Nullable="false" />
+          <Property Name="kredit" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="artikul_info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dost_price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="uniqueID" Type="Guid" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="nomerInDogovor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="artikul" Relationship="Self.FK_stoka_artikul" FromRole="stoka" ToRole="artikul" />
+          <NavigationProperty Name="document" Relationship="Self.FK_stoka_document" FromRole="stoka" ToRole="document" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="vid">
+          <Key>
+            <PropertyRef Name="vid1" />
+          </Key>
+          <Property Name="vid1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="ddsvalue" Type="Byte" />
+          <NavigationProperty Name="podvids" Relationship="Self.FK_podvid_podvid" FromRole="vid" ToRole="podvid" />
+        </EntityType>
+        <EntityType Name="zajavka">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="obect" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="obect" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="prior" Type="Byte" />
+        </EntityType>
+        <EntityType Name="Image">
+          <Key>
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Price">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="obect" />
+            <PropertyRef Name="rowguid" />
+          </Key>
+          <Property Name="id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="price1" Type="Decimal" Precision="10" Scale="4" />
+          <Property Name="obect" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="artikul" Relationship="Self.FK_Prices_artikul" FromRole="Prices" ToRole="artikul" />
+          <NavigationProperty Name="obect1" Relationship="Self.FK_Prices_obect" FromRole="Prices" ToRole="obect" />
+        </EntityType>
+        <Association Name="FK_Kons_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="document_detail" Type="Self.document_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="document_detail">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stoka_artikul">
+          <End Role="artikul" Type="Self.artikul" Multiplicity="1" />
+          <End Role="stoka" Type="Self.stoka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="artikul">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="stoka">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Default_partner_Default_partner">
+          <End Role="partner" Type="Self.partner" Multiplicity="1" />
+          <End Role="Default_partner" Type="Self.Default_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="partner">
+              <PropertyRef Name="Partner1" />
+            </Principal>
+            <Dependent Role="Default_partner">
+              <PropertyRef Name="Partner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Default_partner_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Default_partner" Type="Self.Default_partner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="Proizvoditel1" />
+            </Principal>
+            <Dependent Role="Default_partner">
+              <PropertyRef Name="Proizvoditel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kons_document">
+          <End Role="document" Type="Self.document" Multiplicity="1" />
+          <End Role="document_detail" Type="Self.document_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document">
+              <PropertyRef Name="doc_nomer" />
+            </Principal>
+            <Dependent Role="document_detail">
+              <PropertyRef Name="doc_nomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stoka_document">
+          <End Role="document" Type="Self.document" Multiplicity="1" />
+          <End Role="stoka" Type="Self.stoka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="document">
+              <PropertyRef Name="doc_nomer" />
+            </Principal>
+            <Dependent Role="stoka">
+              <PropertyRef Name="doc_number" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_obect_obect">
+          <End Role="obect" Type="Self.obect" Multiplicity="1" />
+          <End Role="obect1" Type="Self.obect" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="obect">
+              <PropertyRef Name="Obect1" />
+            </Principal>
+            <Dependent Role="obect1">
+              <PropertyRef Name="Obect1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Prices_obect">
+          <End Role="obect" Type="Self.obect" Multiplicity="1" />
+          <End Role="Prices" Type="Self.Price" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="obect">
+              <PropertyRef Name="Obect1" />
+            </Principal>
+            <Dependent Role="Prices">
+              <PropertyRef Name="obect" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_podvid_podvid">
+          <End Role="vid" Type="Self.vid" Multiplicity="1" />
+          <End Role="podvid" Type="Self.podvid" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vid">
+              <PropertyRef Name="vid1" />
+            </Principal>
+            <Dependent Role="podvid">
+              <PropertyRef Name="vid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proizvoditel_Proizvoditel">
+          <End Role="Proizvoditel" Type="Self.Proizvoditel" Multiplicity="1" />
+          <End Role="Proizvoditel1" Type="Self.Proizvoditel" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvoditel">
+              <PropertyRef Name="Proizvoditel1" />
+            </Principal>
+            <Dependent Role="Proizvoditel1">
+              <PropertyRef Name="Proizvoditel1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="VSMDatabaseEntitiesModels" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="artikuls" EntityType="Self.artikul" />
+          <EntitySet Name="barcodes" EntityType="Self.barcode" />
+          <EntitySet Name="Default_partner" EntityType="Self.Default_partner" />
+          <EntitySet Name="doc_type" EntityType="Self.doc_type" />
+          <EntitySet Name="documents" EntityType="Self.document" />
+          <EntitySet Name="document_detail" EntityType="Self.document_detail" />
+          <EntitySet Name="dogovors" EntityType="Self.dogovor" />
+          <EntitySet Name="dogovor_dost" EntityType="Self.dogovor_dost" />
+          <EntitySet Name="obects" EntityType="Self.obect" />
+          <EntitySet Name="paris" EntityType="Self.pari" />
+          <EntitySet Name="partners" EntityType="Self.partner" />
+          <EntitySet Name="podvids" EntityType="Self.podvid" />
+          <EntitySet Name="Proizvoditels" EntityType="Self.Proizvoditel" />
+          <EntitySet Name="revizias" EntityType="Self.revizia" />
+          <EntitySet Name="stokas" EntityType="Self.stoka" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="vids" EntityType="Self.vid" />
+          <EntitySet Name="zajavkas" EntityType="Self.zajavka" />
+          <EntitySet Name="Images" EntityType="Self.Image" />
+          <EntitySet Name="Prices" EntityType="Self.Price" />
+          <AssociationSet Name="FK_Kons_artikul" Association="Self.FK_Kons_artikul">
+            <End Role="artikul" EntitySet="artikuls" />
+            <End Role="document_detail" EntitySet="document_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_artikul" Association="Self.FK_Prices_artikul">
+            <End Role="artikul" EntitySet="artikuls" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stoka_artikul" Association="Self.FK_stoka_artikul">
+            <End Role="artikul" EntitySet="artikuls" />
+            <End Role="stoka" EntitySet="stokas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Default_partner_Default_partner" Association="Self.FK_Default_partner_Default_partner">
+            <End Role="partner" EntitySet="partners" />
+            <End Role="Default_partner" EntitySet="Default_partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Default_partner_Proizvoditel" Association="Self.FK_Default_partner_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditels" />
+            <End Role="Default_partner" EntitySet="Default_partner" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kons_document" Association="Self.FK_Kons_document">
+            <End Role="document" EntitySet="documents" />
+            <End Role="document_detail" EntitySet="document_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stoka_document" Association="Self.FK_stoka_document">
+            <End Role="document" EntitySet="documents" />
+            <End Role="stoka" EntitySet="stokas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_obect_obect" Association="Self.FK_obect_obect">
+            <End Role="obect" EntitySet="obects" />
+            <End Role="obect1" EntitySet="obects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Prices_obect" Association="Self.FK_Prices_obect">
+            <End Role="obect" EntitySet="obects" />
+            <End Role="Prices" EntitySet="Prices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_podvid_podvid" Association="Self.FK_podvid_podvid">
+            <End Role="vid" EntitySet="vids" />
+            <End Role="podvid" EntitySet="podvids" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proizvoditel_Proizvoditel" Association="Self.FK_Proizvoditel_Proizvoditel">
+            <End Role="Proizvoditel" EntitySet="Proizvoditels" />
+            <End Role="Proizvoditel1" EntitySet="Proizvoditels" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="VSMDatabaseModelStoreContainer" CdmEntityContainer="VSMDatabaseEntitiesModels">
+          <EntitySetMapping Name="artikuls">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.artikul">
+              <MappingFragment StoreEntitySet="artikul">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Artikul1" ColumnName="Artikul" />
+                <ScalarProperty Name="Vid" ColumnName="Vid" />
+                <ScalarProperty Name="podwid" ColumnName="podwid" />
+                <ScalarProperty Name="defprice" ColumnName="defprice" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="info1" ColumnName="info1" />
+                <ScalarProperty Name="info2" ColumnName="info2" />
+                <ScalarProperty Name="Proizvoditel" ColumnName="Proizvoditel" />
+                <ScalarProperty Name="rowguid13" ColumnName="rowguid13" />
+                <ScalarProperty Name="isMultiPrice" ColumnName="isMultiPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="barcodes">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.barcode">
+              <MappingFragment StoreEntitySet="barcode">
+                <ScalarProperty Name="barcode1" ColumnName="barcode" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Default_partner">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.Default_partner">
+              <MappingFragment StoreEntitySet="Default_partner">
+                <ScalarProperty Name="Partner" ColumnName="Partner" />
+                <ScalarProperty Name="Proizvoditel" ColumnName="Proizvoditel" />
+                <ScalarProperty Name="default_percent" ColumnName="default_percent" />
+                <ScalarProperty Name="isDefault" ColumnName="isDefault" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="doc_type">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.doc_type">
+              <MappingFragment StoreEntitySet="doc_type">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="Interface" ColumnName="Interface" />
+                <ScalarProperty Name="Default_action" ColumnName="Default_action" />
+                <ScalarProperty Name="strType" ColumnName="strType" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="documents">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.document">
+              <MappingFragment StoreEntitySet="document">
+                <ScalarProperty Name="doc_nomer" ColumnName="doc_nomer" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="payed" ColumnName="payed" />
+                <ScalarProperty Name="data_payed" ColumnName="data_payed" />
+                <ScalarProperty Name="partner" ColumnName="partner" />
+                <ScalarProperty Name="tek_percent" ColumnName="tek_percent" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="izdal" ColumnName="izdal" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="isPrinted" ColumnName="isPrinted" />
+                <ScalarProperty Name="isChecked" ColumnName="isChecked" />
+                <ScalarProperty Name="zabelezka" ColumnName="zabelezka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="document_detail">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.document_detail">
+              <MappingFragment StoreEntitySet="document_detail">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doc_nomer" ColumnName="doc_nomer" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+                <ScalarProperty Name="Kredit" ColumnName="Kredit" />
+                <ScalarProperty Name="Dost_price" ColumnName="Dost_price" />
+                <ScalarProperty Name="IsKons" ColumnName="IsKons" />
+                <ScalarProperty Name="dost_price1" ColumnName="dost_price1" />
+                <ScalarProperty Name="lastpercent" ColumnName="lastpercent" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="artInfo" ColumnName="artInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dogovors">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.dogovor">
+              <MappingFragment StoreEntitySet="dogovor">
+                <ScalarProperty Name="dogovor1" ColumnName="dogovor" />
+                <ScalarProperty Name="egn" ColumnName="egn" />
+                <ScalarProperty Name="Familia" ColumnName="Familia" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dogovor_dost">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.dogovor_dost">
+              <MappingFragment StoreEntitySet="dogovor_dost">
+                <ScalarProperty Name="dogovor" ColumnName="dogovor" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kat" ColumnName="kat" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="price_to_plat" ColumnName="price_to_plat" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="Back" ColumnName="Back" />
+                <ScalarProperty Name="data_get" ColumnName="data_get" />
+                <ScalarProperty Name="data_pay" ColumnName="data_pay" />
+                <ScalarProperty Name="data_back" ColumnName="data_back" />
+                <ScalarProperty Name="dok_order" ColumnName="dok_order" />
+                <ScalarProperty Name="Artikul" ColumnName="Artikul" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="obects">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.obect">
+              <MappingFragment StoreEntitySet="obect">
+                <ScalarProperty Name="Obect1" ColumnName="Obect" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="range" ColumnName="range" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paris">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.pari">
+              <MappingFragment StoreEntitySet="pari">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="suma" ColumnName="suma" />
+                <ScalarProperty Name="zabelezka" ColumnName="zabelezka" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="obect" ColumnName="obect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="partners">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.partner">
+              <MappingFragment StoreEntitySet="partner">
+                <ScalarProperty Name="Partner1" ColumnName="Partner" />
+                <ScalarProperty Name="cPartnerName" ColumnName="cPartnerName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="EIK" ColumnName="EIK" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="IBAN" ColumnName="IBAN" />
+                <ScalarProperty Name="Bank" ColumnName="Bank" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="Place" ColumnName="Place" />
+                <ScalarProperty Name="wid" ColumnName="wid" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="podvids">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.podvid">
+              <MappingFragment StoreEntitySet="podvid">
+                <ScalarProperty Name="vid" ColumnName="vid" />
+                <ScalarProperty Name="podvid1" ColumnName="podvid" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvoditels">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.Proizvoditel">
+              <MappingFragment StoreEntitySet="Proizvoditel">
+                <ScalarProperty Name="Proizvoditel1" ColumnName="Proizvoditel" />
+                <ScalarProperty Name="def_percent" ColumnName="def_percent" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="revizias">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.revizia">
+              <MappingFragment StoreEntitySet="revizia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kol" ColumnName="kol" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="obect" ColumnName="obect" />
+                <ScalarProperty Name="computer" ColumnName="computer" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="stokas">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.stoka">
+              <MappingFragment StoreEntitySet="stoka">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="doc_number" ColumnName="doc_number" />
+                <ScalarProperty Name="obect" ColumnName="obect" />
+                <ScalarProperty Name="debit" ColumnName="debit" />
+                <ScalarProperty Name="kredit" ColumnName="kredit" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="artikul_info" ColumnName="artikul_info" />
+                <ScalarProperty Name="dost_price" ColumnName="dost_price" />
+                <ScalarProperty Name="uniqueID" ColumnName="uniqueID" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="nomerInDogovor" ColumnName="nomerInDogovor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vids">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.vid">
+              <MappingFragment StoreEntitySet="vid">
+                <ScalarProperty Name="vid1" ColumnName="vid" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="ddsvalue" ColumnName="ddsvalue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zajavkas">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.zajavka">
+              <MappingFragment StoreEntitySet="zajavka">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="obect" ColumnName="obect" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="prior" ColumnName="prior" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Images">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.Image">
+              <MappingFragment StoreEntitySet="Images">
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="picture" ColumnName="picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Prices">
+            <EntityTypeMapping TypeName="VSMDatabaseModel.Price">
+              <MappingFragment StoreEntitySet="Prices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="price1" ColumnName="price" />
+                <ScalarProperty Name="obect" ColumnName="obect" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

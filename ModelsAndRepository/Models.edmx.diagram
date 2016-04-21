@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="47bea1f0c5ca416c972a12b3266bfa28" Name="Diagram1">
+        <EntityTypeShape EntityType="VSMDatabaseModel.artikul" Width="1.5" PointX="2.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.barcode" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.Default_partner" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.doc_type" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.document" Width="1.5" PointX="2.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.document_detail" Width="1.5" PointX="5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.dogovor" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.dogovor_dost" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.obect" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.pari" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.partner" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.podvid" Width="1.5" PointX="8" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.Proizvoditel" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.revizia" Width="1.5" PointX="9.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.stoka" Width="1.5" PointX="8" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.sysdiagram" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.vid" Width="1.5" PointX="5.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.zajavka" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.Image" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="VSMDatabaseModel.Price" Width="1.5" PointX="5" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Kons_artikul" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Prices_artikul" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_stoka_artikul" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Default_partner_Default_partner" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Default_partner_Proizvoditel" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Kons_document" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_stoka_document" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_obect_obect" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Prices_obect" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_podvid_podvid" ManuallyRouted="false" />
+        <AssociationConnector Association="VSMDatabaseModel.FK_Proizvoditel_Proizvoditel" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
