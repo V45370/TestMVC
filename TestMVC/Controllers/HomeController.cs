@@ -24,9 +24,7 @@ namespace TestMVC.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            string churka = "huiche";
+            ViewBag.Message = "Your application description page.";            
             return View();
         }
 
@@ -37,10 +35,10 @@ namespace TestMVC.Controllers
             return View();
         }
 
-        public ActionResult GetProducts()
+        public ActionResult Products()
         {
             IEnumerable<artikul> products = Repository.FindAll();
-
+            ViewBag.Products = products;
             return View(products);
         }
     }
