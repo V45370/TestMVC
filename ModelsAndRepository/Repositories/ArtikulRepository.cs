@@ -33,7 +33,7 @@ namespace ModelsAndRepository.Repositories
 
         public IEnumerable<artikul> FindAll()
         {
-            return _dbContext.artikuls.ToList();
+            return _dbContext.artikuls.Take(10).ToList();
         }
 
         public IEnumerable<artikul> Find(string text)

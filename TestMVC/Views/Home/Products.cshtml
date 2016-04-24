@@ -4,7 +4,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Products</h2>
-@foreach (var item in ViewBag.Products)
-{<li>@item.Artikul1</li>}
+@Styles.Render("~/Content/Views/HomeProducts.css")
 
+<h2>Products</h2>
+@*<div class="container">
+    <div class="row">
+        @foreach (var item in ViewBag.Products)
+        {
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="panel panel-default boxshadow">
+                    <div class="panel-heading"><h5>@item.Artikul1</h5></div>
+                    <div class="panel-body"> 
+                        <div class="img-rounded text-center">
+                            <img src="~/Content/Images/book.svg" />
+                        </div>
+                        <div class="caption">
+                            <p class="text-info">@item.Vid</p>
+                        </div>
+                    </div>    
+                    <div class="panel-footer">
+                        <p class="text-info inline-block">@item.defprice лв.</p>
+                        <p class="inline-block">                   
+                             <a href="#" class="btn btn-primary" role="button">Details</a>
+                        </p>
+                    </div>                
+                </div>
+            </div>
+        }        
+    </div>
+    <ul class="pagination">
+        <li><a href="#">1</a></li>
+        <li class="active"><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+    </ul>
+</div>*@
+<div>
+    <div>
+           
+        @foreach (var item in ViewBag.Products)
+        {
+            <div class="item-container text-center">
+                <div><h5>@item.Artikul1</h5></div>
+                <img src="~/Content/Images/book.svg" />
+                <p>@item.Vid</p>
+                <p>@item.defprice лв.</p>
+                <p>
+                    <a>Details</a>
+                </p>
+            </div>
+        }
+        <div id="page-numbers">
+            <ul class="pagination">
+                <li><a href="#">1</a></li>
+                <li class="active"><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+            </ul>
+        </div>
+        
+    </div>    
+ </div>

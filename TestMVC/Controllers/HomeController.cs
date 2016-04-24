@@ -39,7 +39,7 @@ namespace TestMVC.Controllers
         {
             IEnumerable<artikul> products = Repository.FindAll();
             ViewBag.Products = products;
-            return View(products);
+            return View();
         }
     }
 }

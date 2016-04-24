@@ -1,0 +1,38 @@
+﻿/*.product-template{
+    width: 200px;
+    height: 200px
+}
+.float-left{
+    float:left;
+}
+.float-right{
+    float:right;
+}
+img{
+    width: 100px;
+    height: 100px;
+}
+.inline-block{
+    display:inline-block;
+}
+
+.boxshadow{
+     box-shadow: 10px 10px 10px grey;
+}*/
+
+/*.boxshadow{
+     box-shadow: 10px 10px 10px grey;
+}*/
+.item-container{
+    min-height:250px;
+    width:150px;
+    display:inline-block;
+    position:relative;
+}
+img{
+    height: 80px;
+    width: 60px;    
+}
+#page-numbers {
+    text-align:center;
+}
