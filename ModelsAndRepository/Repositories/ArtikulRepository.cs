@@ -33,9 +33,13 @@ namespace ModelsAndRepository.Repositories
 
         public IEnumerable<artikul> FindAll()
         {
-            return _dbContext.artikuls.Take(10).ToList();
+            return _dbContext.artikuls.ToList();
         }
 
+        public IEnumerable<artikul> Take(int count)
+        {
+            return _dbContext.artikuls.Take(count).ToList();
+        }
         public IEnumerable<artikul> Find(string text)
         {
             return _dbContext.artikuls.Where(x => x.Artikul1.StartsWith(text)).ToList();

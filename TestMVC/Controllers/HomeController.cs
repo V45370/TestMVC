@@ -1,10 +1,13 @@
 ﻿using ModelsAndRepository;
 using ModelsAndRepository.Repositories;
 using System;
+using PagedList.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestMVC.Models;
+using PagedList;
 
 namespace TestMVC.Controllers
 {
@@ -35,11 +38,15 @@ namespace TestMVC.Controllers
             return View();
         }
 
-        public ActionResult Products()
+        public ActionResult Products(int? page)
         {
+            int pageSize = 21;
+            int pageNumber = (page ?? 1);
             IEnumerable<artikul> products = Repository.FindAll();
-            ViewBag.Products = products;
-            return View();
+            ProductsViewModel viewModel = new ProductsViewModel();
+            viewModel.Products = products.ToPagedList(pageNumber, pageSize);
+
+            return View(viewModel);
         }
     }
 }
