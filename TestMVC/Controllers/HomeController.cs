@@ -40,6 +40,7 @@ namespace TestMVC.Controllers
 
         public ActionResult Products(int? page)
         {
+            //Test push
             int pageSize = 21;
             int pageNumber = (page ?? 1);
             IEnumerable<artikul> products = Repository.FindAll();
