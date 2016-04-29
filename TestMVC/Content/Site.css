@@ -1,6 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    /*background: linear-gradient(#ffffff, #808080);*/
+    /*background: linear-gradient(to bottom, rgba(255,183,107,0.5) 1%,rgba(255,183,107,0.76) 52%,rgba(255,167,61,0.92) 83%,rgba(255,124,0,0.98) 95%,rgba(255,127,4,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: linear-gradient(to bottom, rgba(255,183,107,0.15) 0%,rgba(255,183,107,0.93) 92%,rgba(255,183,107,0.97) 96%,rgba(255,167,61,0.99) 98%,rgba(255,127,4,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +24,87 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Generated from work.smarchal.com/twbscolor/css/ */
+/* Navbar color theme */
+.navbar-default {
+  background: linear-gradient(#ff8d16, #ffd0a7);
+  /*background-color: #ff8d16;*/
+  /*border-color: #ff8d16;*/
+  border-style: none;
+}
+.navbar-default .navbar-brand {
+  color: #a64300;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #a64300;
+}
+.navbar-default .navbar-text {
+  color: #a64300;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #a64300;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #a64300;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #a64300;
+  background-color: #ff6700;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #a64300;
+  background-color: #ff6700;
+}
+.navbar-default .navbar-toggle {
+  border-color: #ff6700;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #ff6700;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #a64300;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #a64300;
+}
+.navbar-default .navbar-link {
+  color: #a64300;
+}
+.navbar-default .navbar-link:hover {
+  color: #a64300;
+}
+
+@media (max-width: 767px) {
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #a64300;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #a64300;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #a64300;
+    background-color: #ff6700;
+  }
+}
+/* end of navbar color theme */
+
+
+.filter-container{
+    width: 100%;
+    height: 50px;
+    border: 1px solid black;
+   
 }

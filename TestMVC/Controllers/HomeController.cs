@@ -13,11 +13,13 @@ namespace TestMVC.Controllers
 {
     public class HomeController : Controller
     {
-        public ArtikulRepository Repository { get; set; }
+        public ArtikulRepository ProductRepository { get; set; }
+        public VidRepository CategoryRepository { get; set; }
 
         public HomeController()
         {
-            Repository = new ArtikulRepository();
+            ProductRepository = new ArtikulRepository();
+            CategoryRepository = new VidRepository();
         }
 
         public ActionResult Index()
@@ -38,14 +40,17 @@ namespace TestMVC.Controllers
             return View();
         }
 
-        public ActionResult Products(int? page)
+        public ActionResult Products(int? page, string[] filterCategories, decimal?[] filterPriceRange)
         {
             //Test push
             int pageSize = 21;
             int pageNumber = (page ?? 1);
-            IEnumerable<artikul> products = Repository.FindAll();
+            IEnumerable<artikul> products = ProductRepository.FindAll(filterCategories,filterPriceRange);
+            IEnumerable<vid> categories = CategoryRepository.FindAll();
             ProductsViewModel viewModel = new ProductsViewModel();
+
             viewModel.Products = products.ToPagedList(pageNumber, pageSize);
+            viewModel.Categories = categories.ToList();
 
             return View(viewModel);
         }

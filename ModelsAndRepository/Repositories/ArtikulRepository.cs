@@ -31,9 +31,24 @@ namespace ModelsAndRepository.Repositories
             _dbContext.artikuls.Remove(entity);
         }
 
-        public IEnumerable<artikul> FindAll()
+        public IEnumerable<artikul> FindAll(string[] categories, decimal?[] priceRange)
         {
-            return _dbContext.artikuls.ToList();
+            using (_dbContext)
+            {
+                IEnumerable<artikul> result = _dbContext.artikuls;
+                if (categories != null || priceRange != null)
+                {
+                    if (categories != null)
+                    {
+                        result = result.Where(x => categories.Contains(x.Vid));
+                    }
+                    if (priceRange != null)
+                    {
+                        result = result.Where(x => x.defprice >= priceRange[0] && x.defprice <= priceRange[1]);
+                    }
+                }
+                return result.ToList();
+            }                
         }
 
         public IEnumerable<artikul> Take(int count)
